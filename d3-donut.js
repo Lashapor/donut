@@ -11,20 +11,22 @@ donutChart(parentDiv, donutData, height, width, margin, colors);
 
 // donut chart in d3
 function donutChart(parentDiv, donutData, height, width, margin, colors) {
+
+  // Exposed variables
   let attrs = {
-    parentDiv,
-    height,
-    width,
-    colors,
-    margin,
-    outerRadius: Math.min(width, height) / 2 - margin,
-    innerRadius: 130,
-    backgroundColor: "#313540",
-    fontSize: 60,
-    textFont: "monserrat-SemiBold",
-    textColor: "#a25d59",
-    textDy: ".35em",
-    text: "12.47 %",
+    parentDiv,                                            //parent div
+    height,                                               // donut height
+    width,                                                // donut width
+    colors,                                               // donut path colors
+    margin,                                               // space between donut and parent div
+    outerRadius: Math.min(width, height) / 2 - margin,    // outerRadius for donut
+    innerRadius: 130,                                     // innderRadius for donut
+    backgroundColor: "#313540",                           // donut background color, it's important for stroke
+    fontSize: 60,                                         // textSize for text in the donut
+    textFont: "monserrat-SemiBold",                       // textFont for text in the donut
+    textColor: "#a25d59",                                 // textColor for text in the donut
+    textDy: ".35em",                                      // text dy parameter for text in the donut
+    text: "12.47 %",                                      // text value, which is in the donut
   };
 
   // append the svg object to the div called 'parent'
@@ -43,16 +45,17 @@ function donutChart(parentDiv, donutData, height, width, margin, colors) {
 
   // insert data
   d3.json(donutData).then((data) => {
+
     // set the color scale
     let color = d3.scaleOrdinal().domain(Object.keys(data)).range(colors);
 
-    // Compute the position of each group on the pie:
+    // compute the position of each group on the pie:
     let pie = d3.pie().value(function (d) {
       return d[1].value;
     });
     let data_ready = pie(Object.entries(data));
 
-    // Build the donut chart
+    // build the donut chart
     svg
       .selectAll("path")
       .data(data_ready)
@@ -62,7 +65,7 @@ function donutChart(parentDiv, donutData, height, width, margin, colors) {
         "d",
         d3
           .arc()
-          .innerRadius(attrs.innerRadius) // This is the size of the donut hole
+          .innerRadius(attrs.innerRadius) // this is the size of the donut hole
           .outerRadius(attrs.outerRadius)
       )
       .attr("fill", function (d) {
@@ -73,7 +76,7 @@ function donutChart(parentDiv, donutData, height, width, margin, colors) {
       .style("stroke-width", "3px")
       .style("opacity", 0.7);
 
-    // text inside donut
+    // text inside the donut
     svg
       .append("text")
       .attr("dy", attrs.textDy)
