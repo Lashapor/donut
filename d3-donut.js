@@ -11,22 +11,21 @@ donutChart(parentDiv, donutData, height, width, margin, colors);
 
 // donut chart in d3
 function donutChart(parentDiv, donutData, height, width, margin, colors) {
-
   // Exposed variables
   let attrs = {
-    parentDiv,                                            //parent div
-    height,                                               // donut height
-    width,                                                // donut width
-    colors,                                               // donut path colors
-    margin,                                               // space between donut and parent div
-    outerRadius: Math.min(width, height) / 2 - margin,    // outerRadius for donut
-    innerRadius: 130,                                     // innderRadius for donut
-    backgroundColor: "#313540",                           // donut background color, it's important for stroke
-    fontSize: 60,                                         // textSize for text in the donut
-    textFont: "monserrat-SemiBold",                       // textFont for text in the donut
-    textColor: "#a25d59",                                 // textColor for text in the donut
-    textDy: ".35em",                                      // text dy parameter for text in the donut
-    text: "12.47 %",                                      // text value, which is in the donut
+    parentDiv, //parent div
+    height, // donut height
+    width, // donut width
+    colors, // donut path colors
+    margin, // space between donut and parent div
+    outerRadius: Math.min(width, height) / 2 - margin, // outerRadius for donut
+    innerRadius: 130, // innderRadius for donut
+    backgroundColor: "#313540", // donut background color, it's important for stroke
+    fontSize: 60, // textSize for text in the donut
+    textFont: "monserrat-SemiBold", // textFont for text in the donut
+    textColor: "#a25d59", // textColor for text in the donut
+    textDy: ".35em", // text dy parameter for text in the donut
+    text: "12.47 %", // text value, which is in the donut
   };
 
   // append the svg object to the div called 'parent'
@@ -45,7 +44,6 @@ function donutChart(parentDiv, donutData, height, width, margin, colors) {
 
   // insert data
   d3.json(donutData).then((data) => {
-
     // set the color scale
     let color = d3.scaleOrdinal().domain(Object.keys(data)).range(colors);
 
