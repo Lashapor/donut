@@ -2,8 +2,10 @@
 let parentDivSavedPortfolio = ".parentDonutSavedPortfolio";
 let parentDivSummary = ".parentDonutSummary";
 let donutData = "./data.json";
-let parentHeight = 450;
-let parentWidth = 450;
+let parentHeightSavedPortfolio = 199;
+let parentWidthSavedPortfolio = 172;
+let parentHeightSummary = 220;
+let parentWidthSummary = 220;
 let margin = 40;
 let colors = ["#a25d59", "#8365b3", "#467bc4", "#4390a4", "#3e7c6c", "#a78348"];
 
@@ -11,8 +13,8 @@ let colors = ["#a25d59", "#8365b3", "#467bc4", "#4390a4", "#3e7c6c", "#a78348"];
 donutChartSavedPortfolio(
   parentDivSavedPortfolio,
   donutData,
-  parentHeight,
-  parentWidth,
+  parentHeightSavedPortfolio,
+  parentWidthSavedPortfolio,
   margin,
   colors
 );
@@ -21,16 +23,16 @@ donutChartSavedPortfolio(
 function donutChartSavedPortfolio(
   parentDivSavedPortfolio,
   donutData,
-  parentHeight,
-  parentWidth,
+  parentHeightSavedPortfolio,
+  parentWidthSavedPortfolio,
   margin,
   colors
 ) {
   // Exposed variables
   let attrs = {
     parentDivSavedPortfolio: parentDivSavedPortfolio, //parent div
-    height: parentHeight, // donut height
-    width: parentWidth, // donut width
+    height: parentHeightSavedPortfolio, // donut height
+    width: parentWidthSavedPortfolio, // donut width
     thickness: 60,
     colors, // donut path colors
     margin, // space between donut and parent div
@@ -44,13 +46,18 @@ function donutChartSavedPortfolio(
   // calculated properties
   let calc = {};
 
-  calc.outerRadius = (Math.min(parentWidth, parentHeight) - margin) / 2; // outerRadius for donut
+  calc.outerRadius =
+    (Math.min(parentWidthSavedPortfolio, parentHeightSavedPortfolio) - margin) /
+    2; // outerRadius for donut
   calc.innerRadius =
-    (Math.min(parentWidth, parentHeight) - margin) / 2 -
-    Math.min(parentWidth, parentHeight) / 7.5; // innderRadius for donut
+    (Math.min(parentWidthSavedPortfolio, parentHeightSavedPortfolio) - margin) /
+      2 -
+    Math.min(parentWidthSavedPortfolio, parentHeightSavedPortfolio) / 7.5; // innderRadius for donut
   calc.fontSize =
-    ((Math.min(parentWidth, parentHeight) - margin) / 2 -
-      Math.min(parentWidth, parentHeight) / 7.5) /
+    ((Math.min(parentWidthSavedPortfolio, parentHeightSavedPortfolio) -
+      margin) /
+      2 -
+      Math.min(parentWidthSavedPortfolio, parentHeightSavedPortfolio) / 6) /
     2;
 
   // append the svg object to the div called 'parent'
@@ -97,7 +104,7 @@ function donutChartSavedPortfolio(
       })
       .attr("stroke", attrs.backgroundColor)
       .attr("stroke-opacity", 1)
-      .style("stroke-width", "3px")
+      .style("stroke-width", "1.5px")
       .style("opacity", 0.7);
 
     // text inside the donut
@@ -116,8 +123,8 @@ function donutChartSavedPortfolio(
 donutChartSummary(
   parentDivSummary,
   donutData,
-  parentHeight,
-  parentWidth,
+  parentHeightSummary,
+  parentWidthSummary,
   margin,
   colors
 );
@@ -126,16 +133,16 @@ donutChartSummary(
 function donutChartSummary(
   parentDivSummary,
   donutData,
-  parentHeight,
-  parentWidth,
+  parentHeightSummary,
+  parentWidthSummary,
   margin,
   colors
 ) {
   // Exposed variables
   let attrs = {
     parentDivSummary: parentDivSummary, //parent div
-    height: parentHeight, // donut height
-    width: parentWidth, // donut width
+    height: parentHeightSummary, // donut height
+    width: parentWidthSummary, // donut width
     colors, // donut path colors
     margin, // space between donut and parent div
     backgroundColor: "#313540", // donut background color, it's important for stroke
@@ -143,36 +150,41 @@ function donutChartSummary(
     procentTextColor: "#1eb885", // textColor for text in the donut
     procentTextDy: ".05em", // text dy parameter for text in the donut
     procentText: "12.47%", // Procent text value, which is in the donut
+    procentTextX: 0,
+    procentTextY: -10,
     textFont: "monserrat-SemiBold", // textFont for text in the donut
     textColor: "#7b808c", // textColor for text in the donut
     textDy: "1.2",
     text: "Portfolio Returns", // text value
+    textX: 0,
+    textY: -8,
   };
 
   // calculated properties
   let calc = {};
 
-  calc.outerRadius = (d3.min([parentWidth, parentHeight]) - margin) / 2; // outerRadius for donut
+  calc.outerRadius =
+    (d3.min([parentWidthSummary, parentHeightSummary]) - margin) / 2; // outerRadius for donut
   calc.innerRadius =
-    (d3.min([parentWidth, parentHeight]) - margin) / 2 -
-    d3.min([parentWidth, parentHeight]) / 7.5; // innderRadius for donut
+    (d3.min([parentWidthSummary, parentHeightSummary]) - margin) / 2 -
+    d3.min([parentWidthSummary, parentHeightSummary]) / 7.5; // innderRadius for donut
   calc.procentFontSize =
-    ((d3.min([parentWidth, parentHeight]) - margin) / 2 -
-      d3.min([parentWidth, parentHeight]) / 5) /
+    ((d3.min([parentWidthSummary, parentHeightSummary]) - margin) / 2 -
+      d3.min([parentWidthSummary, parentHeightSummary]) / 4.5) /
     2;
   calc.textFontSize =
-    ((d3.min([parentWidth, parentHeight]) - margin) / 2 -
-      d3.min([parentWidth, parentHeight]) / 3.5) /
+    ((d3.min([parentWidthSummary, parentHeightSummary]) - margin) / 2 -
+      d3.min([parentWidthSummary, parentHeightSummary]) / 3.5) /
     2;
-  calc.cyrcleRadius = calc.innerRadius - 7;
   calc.cyrcleStroke =
-    ((d3.min([parentWidth, parentHeight]) - margin) / 2 -
-      d3.min([parentWidth, parentHeight]) / 7.5) /
+    ((d3.min([parentWidthSummary, parentHeightSummary]) - margin) / 2 -
+      d3.min([parentWidthSummary, parentHeightSummary]) / 7.5) /
     14.5;
+  calc.cyrcleRadius = calc.innerRadius - calc.cyrcleStroke + 1.5;
 
   console.log(calc.innerRadius);
-  console.log(calc.outerRadius);
   console.log(calc.cyrcleRadius);
+  console.log(calc.cyrcleStroke);
 
   // append the svg object to the div called 'parent'
   let svg = d3
@@ -218,7 +230,7 @@ function donutChartSummary(
       })
       .attr("stroke", attrs.backgroundColor)
       .attr("stroke-opacity", 1)
-      .style("stroke-width", "3px")
+      .style("stroke-width", "1.5px")
       .style("opacity", 0.7);
 
     // Procent text inside the donut
@@ -229,6 +241,8 @@ function donutChartSummary(
       .attr("font-family", attrs.procentTextFont)
       .attr("font-size", calc.procentFontSize)
       .attr("fill", attrs.procentTextColor)
+      .attr("y", attrs.procentTextY)
+      .attr("x", attrs.procentTextX)
       .text(attrs.procentText);
 
     // text inside the donut
@@ -239,8 +253,8 @@ function donutChartSummary(
       .attr("font-family", attrs.textFont)
       .attr("font-size", calc.textFontSize)
       .attr("fill", attrs.textColor)
-      .attr("y", 0)
-      .attr("x", 0)
+      .attr("y", attrs.textY)
+      .attr("x", attrs.textX)
       .text(attrs.text)
       .call(wrap, 50);
 
