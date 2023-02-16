@@ -167,7 +167,8 @@ function donutChartSummary(
   calc.cyrcleRadius = calc.innerRadius - 7;
   calc.cyrcleStroke =
     ((d3.min([parentWidth, parentHeight]) - margin) / 2 -
-    d3.min([parentWidth, parentHeight]) / 7.5) / 14.5 ;
+      d3.min([parentWidth, parentHeight]) / 7.5) /
+    14.5;
 
   console.log(calc.innerRadius);
   console.log(calc.outerRadius);
